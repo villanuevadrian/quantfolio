@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.models import Stock
@@ -5,7 +6,9 @@ from app.schemas.schemas import StockCreate
 
 
 def get_by_code(db: Session, asset_code: str) -> Stock | None:
-    return db.query(Stock).filter(Stock.asset_code == asset_code).first()
+    return db.execute(
+        select(Stock).where(Stock.asset_code == asset_code)
+    ).scalar_one_or_none()
 
 
 def create(db: Session, stock: StockCreate) -> Stock:
