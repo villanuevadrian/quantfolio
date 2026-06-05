@@ -36,6 +36,7 @@ class Portfolio(Base):
     owner: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.user_id"), nullable=False
     )
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
 
     __table_args__ = (
         CheckConstraint(

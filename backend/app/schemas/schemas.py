@@ -24,6 +24,7 @@ class PortfolioCreate(BaseModel):
 
     asset_type: str
     owner: uuid.UUID
+    name: str
 
 
 class PortfolioResponse(PortfolioCreate):

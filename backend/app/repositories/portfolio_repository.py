@@ -18,7 +18,9 @@ def get_by_user(db: Session, user_id: uuid.UUID) -> list[Portfolio]:
 
 
 def create(db: Session, portfolio: PortfolioCreate) -> Portfolio:
-    db_portfolio = Portfolio(asset_type=portfolio.asset_type, owner=portfolio.owner)
+    db_portfolio = Portfolio(
+        asset_type=portfolio.asset_type, owner=portfolio.owner, name=portfolio.name
+    )
     db.add(db_portfolio)
     db.commit()
     db.refresh(db_portfolio)
