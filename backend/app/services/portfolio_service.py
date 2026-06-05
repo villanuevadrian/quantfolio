@@ -11,5 +11,6 @@ def create_portfolio(db: Session, portfolio: PortfolioCreate) -> Portfolio:
     raise ValueError(f"Invalid asset_type {portfolio.asset_type}")
 
 
+# TODO: refactor valid asset types into a shared Enum (single source of truth)
 def check_valid_asset(asset_type: str) -> bool:
     return asset_type in ["Stock", "Fund", "ETF", "Crypto"]
