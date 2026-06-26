@@ -21,3 +21,8 @@ def get_portfolio(portfolio_id: uuid.UUID, db: Session = Depends(get_db)):
     if portfolio_result is None:
         raise HTTPException(status_code=404, detail="Portfolio not found")
     return portfolio_result
+
+
+@router.get("/", response_model=list[PortfolioResponse])
+def list_portfolios(user_id: uuid.UUID, db: Session = Depends(get_db)):
+    return portfolio_service.get_by_user(db, user_id)
