@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 import app.models.models  # noqa: F401 — needed so Base knows about the models
+from app.api.routers import portfolios
 from app.database import Base, engine
 
 Base.metadata.create_all(bind=engine)
@@ -15,3 +16,6 @@ app = FastAPI(
 @app.get("/health")  # type: ignore[attr-defined]
 def health_check():
     return {"status": "ok"}
+
+
+app.include_router(portfolios.router)  # type: ignore[attr-defined]
